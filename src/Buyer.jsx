@@ -29,4 +29,5 @@ function Buyer() {
   );
 }
 
+
 export default Buyer;

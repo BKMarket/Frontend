@@ -1,42 +1,37 @@
 import logo1 from "../assets/logo1.png";
 import { footerLinks, socialMedia } from "./constant.js";
+import './header-footer.css'
 
 const Footer = () => {
   return (
-    <footer className="max-container bg-[#454545] text-white text-sm">
-      <div className="flex justify-between items-start gap-10 flex-wrap max-lg:flex-col p-8">
-        <div className="flex flex-col items-start">
+    <footer className="footer-container">
+      <div className="footer-content">
+        <div className="footer-logo-section">
           <a href="/">
-            <img src={logo1} width={150} height={46} className="rounded-md	" />
+            <img src={logo1} width={150} height={46} className="logo-img" />
           </a>
-          <p className="mt-6 text-base leading-7 font-montserrat text-white-400 sm:max-w-sm">
+          <p className="footer-description">
             Tìm kiếm và mua sắm thật dễ dàng với chúng tôi. Hãy tham gia cùng
             BKmarket
           </p>
-          <div className="flex items-center gap-5 mt-8">
+          <div className="social-icons">
             {socialMedia.map((item) => (
-              <div
-                key={item.alt}
-                className="flex justify-center items-center w-12 h-12 bg-white rounded-full"
-              >
-                <img src={item.src} alt={item.alt} width={24} height={24} />
+              <div key={item.alt} className="social-icon">
+                <a href={item.link}>
+                  <img src={item.src} alt={item.alt} width={24} height={24} />
+                </a>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="flex flex-1 justify-between gap-10 flex-wrap">
+        <div className="footer-links-section">
           {footerLinks.map((item) => (
             <div key={item.title}>
-              <h4 className="text-white font-montserrat text-2xl leading-normal font-medium mb-6">
-                {item.title}
-              </h4>
+              <h4 className="footer-title">{item.title}</h4>
               <ul>
                 {item.links.map((link) => (
-                  <li
-                    key={link.name}
-                    className="mt-3 text-white-400 font-montserrat leading-normal hover:text-slate-gray cursor-pointer"
-                  >
+                  <li key={link.name} className="footer-link">
                     <a href={link.link}>{link.name}</a>
                   </li>
                 ))}
@@ -45,11 +40,12 @@ const Footer = () => {
           ))}
         </div>
       </div>
-      <div className="flex px-10 h-10">
-        <div className="flex flex-1 justify-start items-center gap-2 font-montserrat cursor-pointer">
-          <p>© 2024-HCMUT Copyright. All rightsreserved.</p>
+
+      <div className="footer-bottom">
+        <div className="footer-bottom-left">
+          <p>© 2024-HCMUT Copyright. All rights reserved.</p>
         </div>
-        <p className="font-montserrat cursor-pointer ">Terms & Conditions</p>
+        <p className="footer-terms">Terms & Conditions</p>
       </div>
     </footer>
   );

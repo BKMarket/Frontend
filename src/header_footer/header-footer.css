@@ -1,0 +1,199 @@
+/* Header container styles */
+.header {
+  background-color: #ffffff; /* White background */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  display: flex;
+  justify-content: center; /* Center the header content */
+  padding: 1rem; /* Adjust padding for more spacing */
+  position: sticky;
+  top: 0;  /* The header will stick at the top */
+  background-color: white;  /* Just to ensure it overlays content smoothly */
+  z-index: 1000;  /* To make sure it's above other elements */
+}
+  
+/* Inner container within header */
+.header-container {
+  display: flex;
+  justify-content: space-between; /* Spread items between left and right */
+  align-items: center;
+  width: 100%; /* Full width of the screen */
+  max-width: 1200px; /* Restrict to a max width */
+}
+
+/* Logo styling */
+.header-logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #1e3a8a; /* Blue color for logo text */
+}
+
+.logo-img {
+  height: 2.25rem;
+}
+
+/* Navigation list */
+.nav-list {
+  display: flex;
+  justify-content: center; /* Center the navigation items */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2rem; /* Add spacing between items */
+}
+
+.nav-item {
+  color: #1f2937; /* Darker text color */
+  font-size: 1rem;
+  transition: text-decoration 0.2s ease;
+}
+
+.nav-item:hover {
+  text-decoration: underline;
+}
+
+/* Login button */
+.login-button {
+  background-color: #1e3a8a; /* Dark blue background */
+  color: white; /* White text */
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #162c72; /* Darker blue on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+.login-button:active {
+  background-color: #0f1f53; /* Even darker on click */
+}
+
+@media (max-width: 639px) {
+  .nav-item,
+  .login-button {
+    display: none; /* Hide navigation and button on small screens */
+  }
+}
+
+
+/* Footer container */
+.footer-container {
+  background-color: #454545;
+  color: white;
+  overflow: visible;
+  font-size: 0.875rem; /* Text size equivalent to text-sm */
+}
+
+/* Flexbox structure for content */
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2.5rem; /* Equivalent to gap-10 */
+  flex-wrap: wrap;
+  padding: 2rem; /* Equivalent to p-8 */
+}
+
+@media (max-width: 1024px) {
+  .footer-content {
+    flex-direction: column; /* Equivalent to max-lg:flex-col */
+  }
+}
+
+/* Logo section */
+.footer-logo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logo-img {
+  border-radius: 0.375rem; /* Equivalent to rounded-md */
+}
+
+/* Description text */
+.footer-description {
+  margin-top: 1.5rem; /* Equivalent to mt-6 */
+  font-size: 1rem; /* Equivalent to text-base */
+  line-height: 1.75rem; /* Equivalent to leading-7 */
+  font-family: 'Montserrat', sans-serif;
+  max-width: 16rem; /* Equivalent to sm:max-w-sm */
+  color: rgba(255, 255, 255, 0.7); /* Light text color */
+}
+
+/* Social icons */
+.social-icons {
+  display: flex;
+  gap: 1.25rem; /* Equivalent to gap-5 */
+  margin-top: 2rem; /* Equivalent to mt-8 */
+}
+
+.social-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem; /* Equivalent to w-12 */
+  height: 3rem; /* Equivalent to h-12 */
+  background-color: white;
+  border-radius: 9999px; /* Equivalent to rounded-full */
+}
+
+/* Links section */
+.footer-links-section {
+  display: flex;
+  flex: 1;
+  justify-content: space-evenly;
+  gap: 2.5rem; /* Equivalent to gap-10 */
+  flex-wrap: wrap;
+}
+
+/* Footer title */
+.footer-title {
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem; /* Equivalent to text-2xl */
+  font-weight: 500;
+  margin-bottom: 1.5rem; /* Equivalent to mb-6 */
+  line-height: 1.75rem; /* Equivalent to leading-normal */
+}
+
+/* Footer link */
+.footer-link {
+  margin-top: 0.75rem; /* Equivalent to mt-3 */
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.75rem; /* Equivalent to leading-normal */
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #94a3b8; /* Equivalent to hover:text-slate-gray */
+}
+
+/* Footer bottom section */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2.5rem; /* Equivalent to px-10 */
+  height: 2.5rem; /* Equivalent to h-10 */
+  padding: 1.5rem;  /* Adjust as needed */
+  margin: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Equivalent to gap-2 */
+  font-family: 'Montserrat', sans-serif;
+}
+
+.footer-terms {
+  display: flex;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+}

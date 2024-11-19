@@ -1,3 +1,118 @@
-.home-hero {
-  margin-top: 100px;
+.home-container {
+  display: flex;
+  padding-left: 28px;
+  padding-right: 28px;
+  background-image: url('https://images.ctfassets.net/wowgx05xsdrr/5Mnh1ED98Hd8NE8fQxyG8l/35010abe444d6a60db79afe74c3ebf4f/article-header-online-market-place-building-a-store-2.jpg?fm=webp&w=3840&q=75'); /* URL of the background image */
+  background-size: cover; /* Makes the background image cover the entire element */
+  background-position: center; /* Centers the background image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  height: 75vh; /* Sets the height to 100% of the viewport height */
+  display: flex; /* Flexbox to center content */
+  flex-direction: column; /* Align items in a column */
+  color: white; /* Text color */
 }
+
+.home-content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 6px;
+  max-width: 6xl;
+  margin-left: auto;
+  margin-right: auto;
+  background: rgba(0,0,0,.6);
+  height: auto !important;
+  width: auto !important;
+  margin-left: 0;
+  position: relative;
+  top: 50px;
+  left: 50px;
+}
+
+.title-primary {
+  color: #718096; /* text-slate-700 */
+  font-weight: bold;
+  font-size: 1.25rem; /* text-xl */
+}
+
+@media (min-width: 1024px) {
+  .title-primary {
+    font-size: 3.75rem; /* text-6xl */
+  }
+}
+
+.title-secondary {
+  color: #a0aec0; /* text-slate-500 */
+  font-weight: bold;
+  font-size: 1.25rem; /* text-xl */
+}
+
+@media (min-width: 1024px) {
+  .title-secondary {
+    font-size: 3.75rem; /* text-6xl */
+  }
+}
+
+.description {
+  color: #cbd5e0; /* text-gray-400 */
+  font-size: 0.75rem; /* text-xs */
+}
+
+@media (min-width: 640px) {
+  .description {
+    font-size: 0.875rem; /* text-sm */
+  }
+}
+
+.search-link {
+  font-size: 1.25rem; /* text-xs */
+  color: #2c5282; /* text-blue-800 */
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.search-link:hover {
+  text-decoration: underline;
+}
+
+.swiper-container{
+  width: 75%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 150px;
+}
+
+.product-image {
+  width: 200px;
+  height: 250px;
+  margin: auto;
+  border-radius: 20px;
+  background-size: cover;
+}
+
+.swiper-title, .listing-title {
+  color: #142D65;
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.listing-box {
+  display: flex;
+  width: 90%;
+  justify-content: flex-start;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 100px;
+}
+
+

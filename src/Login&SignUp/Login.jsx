@@ -1,49 +1,56 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import PersonIcon from '@mui/icons-material/Person';
+import './Login-SignUp.css'; // Import the CSS file for styling
 
 export default function Login() {
   const [formData, setFormData] = useState({});
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.id]: e.target.value,
     });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate("/");
   };
+
   return (
-    <div className="my-10">
-      <div className="p-3 max-w-lg mx-auto w-96 ">
-        <h1 className="text-3xl text-center font-semibold my-7 text-[#042b92]	">
-          Đăng nhập
-        </h1>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <div>      
+      <div className="banner">
+        <h1 className="text-h1">Rất vui khi được gặp lại bạn</h1>
+        <h2 className="text-h2">Welcome back</h2>
+      </div>
+      <div className="container">
+        <h1 className="title">Đăng nhập</h1>
+        <form onSubmit={handleSubmit} className="form">
           <input
             type="email"
-            placeholder="email"
-            className="border p-3 rounded-lg"
+            placeholder="Email"
+            className="input"
             id="email"
             onChange={handleChange}
           />
           <input
             type="password"
-            placeholder="password"
-            className="border p-3 rounded-lg"
+            placeholder="Password"
+            className="input"
             id="password"
             onChange={handleChange}
           />
 
-          <button className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
+          <button className="button">
             {"Đăng nhập"}
           </button>
         </form>
-        <div className="flex gap-2 mt-5">
+        <div className="footer">
           <p>Chưa có tài khoản?</p>
           <Link to={"/signup"}>
-            <span className="text-blue-700">Đăng kí ngay</span>
+            <span className="link">Đăng kí ngay</span>
           </Link>
         </div>
       </div>

@@ -8,8 +8,6 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import StorefrontIcon from "@mui/icons-material/Storefront";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
@@ -120,13 +118,15 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
 
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              SHOP
-            </Typography>
+            {!isCollapsed && (
+              <Typography
+                variant="h6"
+                color={colors.grey[300]}
+                sx={{ m: "15px 0 5px 20px" }}
+              >
+                SHOP
+              </Typography>
+            )}
             <Item
               title="SẢN PHẨM"
               to="/seller/product"
@@ -148,28 +148,16 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
-              title="Profile Form"
-              to="/seller/form"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="FAQ Page"
-              to="/seller/faq"
-              icon={<HelpOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
 
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              BIỂU ĐỒ
-            </Typography>
+            {!isCollapsed && (
+              <Typography
+                variant="h6"
+                color={colors.grey[300]}
+                sx={{ m: "15px 0 5px 20px" }}
+              >
+                BIỂU ĐỒ
+              </Typography>
+            )}
             <Item
               title="Bar Chart"
               to="/seller/bar"
