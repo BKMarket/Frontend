@@ -7,6 +7,7 @@ import Login from "./Login&SignUp/Login";
 import SignUp from "./Login&SignUp/SignUp";
 import Search from "./Search/Search";
 import ShoppingCart from "./Cart/Cart";
+import Listing from "./Search/ListingSite";
 
 function Buyer() {
   return (
@@ -21,6 +22,7 @@ function Buyer() {
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/search" element={<Search />}></Route>
         <Route path="/cart" element={<ShoppingCart />}></Route>
+        <Route path="/listing/:listingId" element={<Listing />}></Route>
       </Routes>
       <Footer />
     </>

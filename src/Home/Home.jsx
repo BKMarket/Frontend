@@ -3,8 +3,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
 import "swiper/swiper-bundle.css";
-
+import { useState } from "react";
 import "./home.css";
+import listing from "../Search/data";
+import ListingItem from "../Search/ListingItem";
+
 export default function Home() {
   const list_hero = [
     "https://dosi-in.com/images/detailed/42/CDL4_1.jpg",
@@ -13,6 +16,14 @@ export default function Home() {
     "https://cdn.tgdd.vn/Products/Images/7077/310849/samsung-galaxy-watch6-40mm-vang-1-750x500.jpg",
     "https://cdn.viettelstore.vn/Images/Product/ProductImage/401676858.jpeg",
   ];
+  const list_promo = [
+    "https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:quality(100)/2024_2_20_638440648953026094_cach-san-sale-shopee.jpg",
+    "https://nplaw.vn/upload/images/quang-cao-thuong-mai-min.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8700uXXKGTNcxeAKC5FjGkpPeejMv8TD8Bw&s",
+    "https://digistar.vn/wp-content/uploads/2015/11/khuyen-mai-mua-1-tang-1-BANNER-900x400.png",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiR5dT31Tvt4DcKDA69EeoYxbNf1oogkp27w&s",
+  ];
+  const [offerListings, setOfferListings] = useState(listing);
   SwiperCore.use([Navigation]);
   return (
     <div>
@@ -51,6 +62,39 @@ export default function Home() {
             ))}
           </Swiper>
         </div>
+      </div>
+      <div className="flex flex-col max-w-6xl mx-auto p-3 my-10 rounded-lg overflow-hidden">
+        <h2 className="text-2xl font-semibold text-slate-600">Khuyến mãi</h2>
+        <div className="text-sm text-blue-800 mb-3">Dành cho bạn</div>
+        <div className="flex">
+          {list_promo.map((item) => (
+            <div key={item}>
+              <img src={item} className="h-[150px]" key={item}></img>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10">
+        {offerListings && offerListings.length > 0 && (
+          <div className="">
+            <div className="my-3">
+              <h2 className="text-2xl font-semibold text-slate-600">
+                Sản phẩm nổi bật
+              </h2>
+              <Link
+                className="text-sm text-blue-800 hover:underline"
+                to={"/search?offer=true"}
+              >
+                Tìm hiểu thêm
+              </Link>
+            </div>
+            <div className="flex flex-wrap gap-4">
+              {offerListings.map((listing) => (
+                <ListingItem listing={listing} key={listing._id} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListingItem from "./ListingItem.jsx";
+import listing from "./data.js";
 
 export default function Search() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export default function Search() {
     order: "desc",
   });
   const [loading, setLoading] = useState(false);
-  const [listings, setListings] = useState([]);
+  const [listings, setListings] = useState(listing);
   const [showMore, setShowMore] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();

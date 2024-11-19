@@ -2,6 +2,7 @@ import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { FaCartShopping } from "react-icons/fa6";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
 export default function Header() {
   return (
@@ -28,26 +29,34 @@ export default function Header() {
           </button>
         </form>
         <ul className="flex gap-4">
-          <Link to="/">
+          <Link to="/search">
             <li className="hidden sm:inline text-slate-700 hover:underline">
-              Home
+              Tìm kiếm
             </li>
           </Link>
           <Link to="/about">
             <li className="hidden sm:inline text-slate-700 hover:underline">
-              About
+              Về chúng tôi
             </li>
           </Link>
-          <Link to="/login">
+          <Link to="/seller">
             <li className="hidden sm:inline text-slate-700 hover:underline">
-              Đăng nhập
+              Bán hàng
             </li>
           </Link>
         </ul>
       </div>
-      <div className="flex items-center justify-center w-[10%] text-lg	">
+      <div className="flex items-center justify-center w-[15%] text-lg	">
         <Link to="/cart">
           <FaCartShopping className="text-[#042b92]" width={100} height={100} />
+        </Link>
+        <Link to="/login">
+          <li className="hidden sm:inline text-slate-700 hover:underline ml-10">
+            Đăng nhập
+          </li>
+        </Link>
+        <Link to="/admin" className="ml-10">
+          <AdminPanelSettingsIcon className="text-[#042b92]"></AdminPanelSettingsIcon>
         </Link>
       </div>
     </header>
