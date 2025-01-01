@@ -1,50 +1,127 @@
-import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
-import Topbar from "./scenes/global/Topbar";
-import Sidebar from "./scenes/global/Sidebar";
-import Dashboard from "./scenes/dashboard";
-import Manager_Product from "./scenes/manager_product";
-import Order from "./scenes/order";
-import New_product from "./scenes/new_product";
-import Bar from "./scenes/bar";
-import Form from "./scenes/form";
-import Line from "./scenes/line";
-import Pie from "./scenes/pie";
-import FAQ from "./scenes/faq";
-import Geography from "./scenes/geography";
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import { ColorModeContext, useMode } from "./theme";
-import "./seller.css";
+import './css/style.css';
+import './css/satoshi.css';
+import 'jsvectormap/dist/jsvectormap.css';
+import 'flatpickr/dist/flatpickr.min.css';
 
-function Admin() {
-  const [theme, colorMode] = useMode();
-  const [isSidebar, setIsSidebar] = useState(true);
+import { useEffect, useState } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
-  return (
-    <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <div className="app">
-          <Sidebar isSidebar={isSidebar} />
-          <main className="content">
-            <Topbar setIsSidebar={setIsSidebar} />
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/product" element={<Manager_Product />} />
-              <Route path="/new_product" element={<New_product />} />
-              <Route path="/order" element={<Order />} />
-              <Route path="/form" element={<Form />} />
-              <Route path="/bar" element={<Bar />} />
-              <Route path="/pie" element={<Pie />} />
-              <Route path="/line" element={<Line />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/geography" element={<Geography />} />
-            </Routes>
-          </main>
-        </div>
-      </ThemeProvider>
-    </ColorModeContext.Provider>
-  );
+import Loader from './common/Loader';
+import PageTitle from './components/PageTitle';
+import ECommerce from './pages/Dashboard/ECommerce';
+import CreateProduct from './pages/Form/CreateProduct';
+import UpdateProduct from './pages/Form/UpdateProduct';
+import TableThree from './components/Tables/TableThree';
+import TableTwo from './components/Tables/ProductTable';
+import DefaultLayout from './layout/DefaultLayout';
+
+function App() {
+	const [loading, setLoading] = useState(true);
+	const { pathname } = useLocation();
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [pathname]);
+
+	useEffect(() => {
+		setTimeout(() => setLoading(false), 1000);
+	}, []);
+
+	return loading ? (
+		<Loader />
+	) : (
+		<DefaultLayout>
+			<Routes>
+				<Route
+					index
+					element={
+						<>
+							<PageTitle title='Trang người bán' />
+							<ECommerce />
+						</>
+					}
+				/>
+				<Route
+					path='/products/add'
+					element={
+						<>
+							<PageTitle title='Thêm sản phẩm' />
+							<CreateProduct />
+						</>
+					}
+				/>
+				<Route
+					path='/products/update/:slug'
+					element={
+						<>
+							<PageTitle title='Cập nhật sản phẩm' />
+							<UpdateProduct />
+						</>
+					}
+				/>
+				<Route
+					path='/products/all'
+					element={
+						<>
+							<PageTitle title='Sản phẩm của tôi' />
+							<TableTwo stupidString='my' />
+						</>
+					}
+					key={location.pathname}
+				/>
+				<Route
+					path='/products/violation'
+					element={
+						<>
+							<PageTitle title='Sản phẩm vi phạm' />
+							<TableTwo stupidString='banned' />
+						</>
+					}
+					key={location.pathname}
+				/>
+				<Route
+					path='/orders/all'
+					element={
+						<>
+							<PageTitle title='Đơn hàng' />
+							<TableThree stupidString='my' />
+						</>
+					}
+					key={location.pathname}
+				/>
+				<Route
+					path='/orders/pending'
+					element={
+						<>
+							<PageTitle title='Đơn hàng chờ xác nhận' />
+							<TableThree stupidString='pending' />
+						</>
+					}
+					key={location.pathname}
+				/>
+				<Route
+					path='/orders/accepted'
+					element={
+						<>
+							<PageTitle title='Đơn hàng đang chuẩn bị' />
+							<TableThree stupidString='accepted' />
+						</>
+					}
+					key={location.pathname}
+				/>
+				<Route
+					path='/orders/canceled'
+					element={
+						<>
+							<PageTitle title='Đơn hàng bị hủy' />
+							<TableThree stupidString='canceled' />
+						</>
+					}
+					key={location.pathname}
+				/>
+			</Routes>
+		</DefaultLayout>
+	);
 }
 
-export default Admin;
+export default App;
