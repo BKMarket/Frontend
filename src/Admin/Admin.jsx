@@ -12,6 +12,7 @@ import ECommerce from './pages/Dashboard/ECommerce';
 import CreateProduct from './pages/Form/CreateProduct';
 import UpdateProduct from './pages/Form/UpdateProduct';
 import TableThree from './components/Tables/TableThree';
+import TableOne from './components/Tables/TableOne';
 import TableTwo from './components/Tables/ProductTable';
 import DefaultLayout from './layout/DefaultLayout';
 
@@ -42,82 +43,67 @@ function App() {
 					}
 				/>
 				<Route
-					path='/products/add'
+					path='products'
 					element={
 						<>
-							<PageTitle title='Thêm sản phẩm' />
-							<CreateProduct />
+							<PageTitle title='Sản phẩm' />
+							<TableTwo />
 						</>
 					}
 				/>
 				<Route
-					path='/products/update/:slug'
+					path='reports/all'
 					element={
 						<>
-							<PageTitle title='Cập nhật sản phẩm' />
-							<UpdateProduct />
+							<PageTitle title='Báo cáo' />
+							<TableOne />
 						</>
 					}
 				/>
 				<Route
-					path='/products/all'
+					path='reports/pending'
 					element={
 						<>
-							<PageTitle title='Sản phẩm của tôi' />
-							<TableTwo stupidString='my' />
+							<PageTitle title='Báo cáo' />
+							<TableOne stupidString={'pending'} />
 						</>
 					}
-					key={location.pathname}
 				/>
 				<Route
-					path='/products/violation'
+					path='reports/innocent'
 					element={
 						<>
-							<PageTitle title='Sản phẩm vi phạm' />
-							<TableTwo stupidString='banned' />
+							<PageTitle title='Báo cáo' />
+							<TableOne stupidString={'innocent'} />
 						</>
 					}
-					key={location.pathname}
 				/>
 				<Route
-					path='/orders/all'
+					path='reports/guilty'
 					element={
 						<>
-							<PageTitle title='Đơn hàng' />
-							<TableThree stupidString='my' />
+							<PageTitle title='Báo cáo' />
+							<TableOne stupidString={'guilty'} />
 						</>
 					}
-					key={location.pathname}
 				/>
 				<Route
-					path='/orders/pending'
+					path='users/banned'
 					element={
 						<>
-							<PageTitle title='Đơn hàng chờ xác nhận' />
-							<TableThree stupidString='pending' />
+							<PageTitle title='Người dùng' />
+							<TableThree stupidString={'banned'} />
 						</>
 					}
-					key={location.pathname}
 				/>
 				<Route
-					path='/orders/accepted'
+					path='users/all'
 					element={
 						<>
-							<PageTitle title='Đơn hàng đang chuẩn bị' />
-							<TableThree stupidString='accepted' />
+							<PageTitle title='Người dùng' />
+							<TableThree />
 						</>
 					}
-					key={location.pathname}
-				/>
-				<Route
-					path='/orders/canceled'
-					element={
-						<>
-							<PageTitle title='Đơn hàng bị hủy' />
-							<TableThree stupidString='canceled' />
-						</>
-					}
-					key={location.pathname}
 				/>
 			</Routes>
 		</DefaultLayout>

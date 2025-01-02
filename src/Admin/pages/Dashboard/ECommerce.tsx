@@ -11,59 +11,56 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as Icons from '@fortawesome/free-solid-svg-icons';
 
 const ECommerce: React.FC = () => {
-	const [totalOrders, setTotalOrders] = useState(0);
-	const [totalProducts, setTotalProducts] = useState(0);
+	const [users, setUsers] = useState(0);
+	const [products, setProducts] = useState(0);
+	const [orders, setOrders] = useState(0);
+	const [revenue, setRevenue] = useState(0);
+
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await axios.get(import.meta.env.VITE_HOST + '/api/seller/orders/my');
-			setTotalOrders(response.data.data);
-
-			const response2 = await axios.get(import.meta.env.VITE_HOST + '/api/seller/products/my');
-			setTotalProducts(response2.data.data);
+			try {
+				axios.get(import.meta.env.VITE_HOST + '/api/admin/accounts/count').then((res) => {
+					setUsers(res.data.data);
+				});
+				axios.get(import.meta.env.VITE_HOST + '/api/admin/products/count').then((res) => {
+					setProducts(res.data.data);
+				});
+				axios.get(import.meta.env.VITE_HOST + '/api/admin/orders/count').then((res) => {
+					setOrders(res.data.data);
+				});
+				axios.get(import.meta.env.VITE_HOST + '/api/admin/orders/revenue').then((res) => {
+					setRevenue(res.data.data);
+				});
+			} catch {}
 		};
 
 		fetchData();
-	}, []);
+	});
 
 	return (
 		<>
-			{totalOrders && totalProducts && (
-				<div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5'>
-					<CardDataStats
-						title='Số đơn chờ xác nhận'
-						total={totalOrders?.filter((x) => x.product.stage == 'pending').length}
-					>
-						<FontAwesomeIcon icon={Icons.faReceipt} className='fill-primary dark:fill-white' />
-					</CardDataStats>
-					<CardDataStats
-						title='Số đơn đang xử lý'
-						total={totalOrders?.filter((x) => x.product.stage == 'accepted').length}
-					>
-						<FontAwesomeIcon icon={Icons.faReceipt} className='fill-primary dark:fill-white' />
-					</CardDataStats>
-					<CardDataStats
-						title='Số đơn đã xử lý'
-						total={totalOrders?.filter((x) => x.product.stage == 'received').length}
-					>
-						<FontAwesomeIcon icon={Icons.faReceipt} className='fill-primary dark:fill-white' />
-					</CardDataStats>
-					<CardDataStats title='Số đơn bị hủy' total={totalOrders?.filter((x) => x.product.stage == 'canceled').length}>
-						<FontAwesomeIcon icon={Icons.faReceipt} className='fill-primary dark:fill-white' />
-					</CardDataStats>
-					<CardDataStats
-						title='Sản phẩm vi phạm'
-						total={
-							totalProducts?.filter((x) => x.deleted && x.deletedBy != JSON.parse(localStorage.getItem('account'))._id)
-								.length
-						}
-					>
-						<FontAwesomeIcon icon={Icons.faShopSlash} className='fill-primary dark:fill-white' />
-					</CardDataStats>
-					<CardDataStats title='Sản phẩm hết hàng' total={totalProducts?.filter((x) => x.stock == 0).length}>
-						<FontAwesomeIcon icon={Icons.faExclamation} className='fill-primary dark:fill-white' />
-					</CardDataStats>
-				</div>
-			)}
+			<div className='mt-4 grid grid-cols-4 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5'>
+				<CardDataStats title='Tổng số người dùng' total={users}>
+					<FontAwesomeIcon icon={Icons.faUserGroup} className='fill-primary dark:fill-white' />
+				</CardDataStats>
+				<CardDataStats title='Tổng số sản phẩm' total={products}>
+					<FontAwesomeIcon icon={Icons.faBoxArchive} className='fill-primary dark:fill-white' />
+				</CardDataStats>
+				<CardDataStats title='Tổng số giao dịch' total={orders}>
+					<FontAwesomeIcon icon={Icons.faMoneyCheckAlt} className='fill-primary dark:fill-white' />
+				</CardDataStats>
+				<CardDataStats
+					title='Tổng số doanh thu'
+					total={Number(revenue).toLocaleString('vi-VN', {
+						style: 'currency',
+						currency: 'VND',
+					})}
+				>
+					<FontAwesomeIcon icon={Icons.faDollarSign} className='fill-primary dark:fill-white' />
+				</CardDataStats>
+			</div>
+
+			<ChartOne />
 		</>
 	);
 };

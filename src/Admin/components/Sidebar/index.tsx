@@ -139,83 +139,61 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 							</SidebarLinkGroup>
 							{/* <!-- Menu Item Dashboard --> */}
 
-							{/* <!-- Menu Item Forms --> */}
-							<SidebarLinkGroup activeCondition={pathname === '/forms' || pathname.includes('forms')}>
-								{(handleClick, open) => {
-									return (
-										<React.Fragment>
-											<NavLink
-												to='#'
-												className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-													(pathname === '/forms' || pathname.includes('forms')) && 'bg-graydark dark:bg-meta-4'
-												}`}
-												onClick={(e) => {
-													e.preventDefault();
-													sidebarExpanded ? handleClick() : setSidebarExpanded(true);
-												}}
-											>
-												<FontAwesomeIcon icon={Icons.faReceipt} />
-												Quản lý đơn hàng
-												<FontAwesomeIcon
-													icon={open ? Icons.faMinus : Icons.faPlus}
-													className='ml-auto'
-												></FontAwesomeIcon>
-											</NavLink>
-											{/* <!-- Dropdown Menu Start --> */}
-											<div className={`translate transform overflow-hidden ${!open && 'hidden'}`}>
-												<ul className='mt-4 mb-5.5 flex flex-col gap-2.5 pl-6'>
-													<li>
-														<NavLink
-															to='orders/all'
-															className={({ isActive }) =>
-																'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-																(isActive && '!text-white')
-															}
-														>
-															Tất cả đơn hàng
-														</NavLink>
-													</li>
-													<li>
-														<NavLink
-															to='orders/pending'
-															className={({ isActive }) =>
-																'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-																(isActive && '!text-white')
-															}
-														>
-															Đơn hàng chờ xác nhận
-														</NavLink>
-													</li>
-													<li>
-														<NavLink
-															to='orders/accepted'
-															className={({ isActive }) =>
-																'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-																(isActive && '!text-white')
-															}
-														>
-															Đơn hàng đang chuẩn bị
-														</NavLink>
-													</li>
-													<li>
-														<NavLink
-															to='orders/canceled'
-															className={({ isActive }) =>
-																'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-																(isActive && '!text-white')
-															}
-														>
-															Đơn hàng bị hủy
-														</NavLink>
-													</li>
-												</ul>
-											</div>
-											{/* <!-- Dropdown Menu End --> */}
-										</React.Fragment>
-									);
-								}}
-							</SidebarLinkGroup>
-							{/* <!-- Menu Item Forms --> */}
+							{/* <!-- Menu Item Tables --> */}
+							<li>
+								<SidebarLinkGroup activeCondition={pathname === '/forms' || pathname.includes('forms')}>
+									{(handleClick, open) => {
+										return (
+											<React.Fragment>
+												<NavLink
+													to='#'
+													className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+														(pathname === '/forms' || pathname.includes('forms')) && 'bg-graydark dark:bg-meta-4'
+													}`}
+													onClick={(e) => {
+														e.preventDefault();
+														sidebarExpanded ? handleClick() : setSidebarExpanded(true);
+													}}
+												>
+													<FontAwesomeIcon icon={Icons.faBagShopping} />
+													Báo cáo
+													<FontAwesomeIcon
+														icon={open ? Icons.faMinus : Icons.faPlus}
+														className='ml-auto'
+													></FontAwesomeIcon>
+												</NavLink>
+												{/* <!-- Dropdown Menu Start --> */}
+												<div className={`translate transform overflow-hidden ${!open && 'hidden'}`}>
+													<ul className='mt-4 mb-5.5 flex flex-col gap-2.5 pl-6'>
+														{[
+															{ name: 'Tất cả báo cáo', to: 'reports/all' },
+															{ name: 'Báo cáo cần phê duyệt', to: 'reports/pending' },
+															{ name: 'Báo cáo vi phạm', to: 'reports/guilty' },
+															{ name: 'Báo cáo không vi phạm', to: 'reports/innocent' },
+														].map((section) => {
+															return (
+																<li>
+																	<NavLink
+																		to={section.to}
+																		className={({ isActive }) =>
+																			'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+																			(isActive && '!text-white')
+																		}
+																	>
+																		{section.name}
+																	</NavLink>
+																</li>
+															);
+														})}
+													</ul>
+												</div>
+												{/* <!-- Dropdown Menu End --> */}
+											</React.Fragment>
+										);
+									}}
+								</SidebarLinkGroup>
+							</li>
+							{/* <!-- Menu Item Tables --> */}
 
 							{/* <!-- Menu Item Tables --> */}
 							<li>
@@ -234,7 +212,58 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 													}}
 												>
 													<FontAwesomeIcon icon={Icons.faBagShopping} />
-													Quản lý sản phẩm
+													Sản phẩm
+													<FontAwesomeIcon
+														icon={open ? Icons.faMinus : Icons.faPlus}
+														className='ml-auto'
+													></FontAwesomeIcon>
+												</NavLink>
+												{/* <!-- Dropdown Menu Start --> */}
+												<div className={`translate transform overflow-hidden ${!open && 'hidden'}`}>
+													<ul className='mt-4 mb-5.5 flex flex-col gap-2.5 pl-6'>
+														{[{ name: 'Sản phẩm cần phê duyệt', to: 'products' }].map((section) => {
+															return (
+																<li>
+																	<NavLink
+																		to={section.to}
+																		className={({ isActive }) =>
+																			'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+																			(isActive && '!text-white')
+																		}
+																	>
+																		{section.name}
+																	</NavLink>
+																</li>
+															);
+														})}
+													</ul>
+												</div>
+												{/* <!-- Dropdown Menu End --> */}
+											</React.Fragment>
+										);
+									}}
+								</SidebarLinkGroup>
+							</li>
+							{/* <!-- Menu Item Tables --> */}
+
+							{/* <!-- Menu Item Tables --> */}
+							<li>
+								<SidebarLinkGroup activeCondition={pathname === '/forms' || pathname.includes('forms')}>
+									{(handleClick, open) => {
+										return (
+											<React.Fragment>
+												<NavLink
+													to='#'
+													className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+														(pathname === '/forms' || pathname.includes('forms')) && 'bg-graydark dark:bg-meta-4'
+													}`}
+													onClick={(e) => {
+														e.preventDefault();
+														sidebarExpanded ? handleClick() : setSidebarExpanded(true);
+													}}
+												>
+													<FontAwesomeIcon icon={Icons.faBagShopping} />
+													Người dùng
 													<FontAwesomeIcon
 														icon={open ? Icons.faMinus : Icons.faPlus}
 														className='ml-auto'
@@ -244,9 +273,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 												<div className={`translate transform overflow-hidden ${!open && 'hidden'}`}>
 													<ul className='mt-4 mb-5.5 flex flex-col gap-2.5 pl-6'>
 														{[
-															{ name: 'Tât cả sản phẩm', to: 'products/all' },
-															{ name: 'Sản phẩm vi phạm', to: 'products/violation' },
-															{ name: 'Thêm sản phẩm', to: 'products/add' },
+															{ name: 'Tất cả người dùng', to: 'users/all' },
+															{ name: 'Người dùng đã cấm', to: 'users/banned' },
 														].map((section) => {
 															return (
 																<li>

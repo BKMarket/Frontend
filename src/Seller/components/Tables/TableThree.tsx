@@ -4,27 +4,64 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as Icons from '@fortawesome/free-solid-svg-icons';
 
+const Pagination = ({ currentPage, setCurrentPage }) => {
+	return (
+		<div className='flex items-center justify-center space-x-2 mt-4 mb-4'>
+			{/* Previous Button */}
+			<button
+				className={`px-4 py-2 rounded-md border border-stroke dark:border-strokedark bg-white dark:bg-boxdark text-sm text-black dark:text-white shadow-default hover:brightness-125 ${
+					currentPage <= 1 ? 'opacity-50 cursor-not-allowed' : ''
+				}`}
+				onClick={() => setCurrentPage(currentPage - 1)}
+				disabled={currentPage === 1}
+			>
+				&lt;
+			</button>
+
+			{/* Current Page */}
+			<input
+				className='w-16 text-center px-4 py-2 rounded-md border border-stroke dark:border-strokedark bg-white dark:bg-boxdark text-sm text-black dark:text-white shadow-default'
+				value={currentPage}
+				onChange={(e) => e.target.value && setCurrentPage(Number(e.target.value))}
+				min='1'
+			/>
+
+			{/* Next Button */}
+			<button
+				className={`px-4 py-2 rounded-md border border-stroke dark:border-strokedark bg-white dark:bg-boxdark text-sm text-black dark:text-white shadow-default hover:brightness-125`}
+				onClick={() => setCurrentPage(currentPage + 1)}
+			>
+				&gt;
+			</button>
+		</div>
+	);
+};
+
 const TableThree = ({ stupidString }) => {
 	const [orders, setOrders] = useState([]);
 	const location = useLocation();
 	const navigate = useNavigate();
+	const [currentPage, setCurrentPage] = useState(1);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await axios.get(import.meta.env.VITE_HOST + '/api/seller/orders/' + stupidString);
+			const response = await axios.get(import.meta.env.VITE_HOST + '/api/seller/orders/' + stupidString, {
+				params: { page: currentPage },
+			});
 			setOrders(response.data.data);
 		};
 
 		fetchData();
-	}, [location]);
+	}, [location, currentPage]);
 
 	return (
 		<div className='rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1'>
+			<Pagination currentPage={currentPage} setCurrentPage={setCurrentPage}></Pagination>
 			<div className='max-w-full overflow-x-auto'>
 				<table className='w-full table-auto'>
 					<thead>
 						<tr className='bg-gray-2 text-left dark:bg-meta-4'>
-							<th className='min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11'></th>
+							<th className='min-w-[150px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11'></th>
 							<th className='min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11'>Mã đơn hàng</th>
 							<th className='min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11'>Tên sản phẩm</th>
 							<th className='min-w-[120px] py-4 px-4 font-medium text-black dark:text-white'>Số lượng</th>
@@ -37,7 +74,7 @@ const TableThree = ({ stupidString }) => {
 						{orders.map((order, key) => (
 							<tr key={key}>
 								<td className='border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11 relative group'>
-									<img src={order.product.thumbnail} className='h-20 w-20 object-contain' />
+									<img src={order.product.thumbnail} className='h-15 w-15 object-contain' />
 									<h5>{order.product.title}</h5>
 								</td>
 								<td className='border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11'>

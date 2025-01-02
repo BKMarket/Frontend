@@ -43,7 +43,7 @@ function App() {
 				<Routes>
 					<Route path={'/*'} element={<Buyer />}></Route>
 					<Route path={'/seller/*'} element={loggedin ? <Seller /> : <Navigate to='/login' />}></Route>
-					<Route path={'/admin/*'} element={<Admin />}></Route>
+					<Route path={'/admin/*'} element={loggedin ? <Admin /> : <Navigate to='/login' />}></Route>
 				</Routes>
 			</BrowserRouter>
 		</LoggedinContext.Provider>
