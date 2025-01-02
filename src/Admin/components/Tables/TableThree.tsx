@@ -36,11 +36,19 @@ const Pagination = ({ currentPage, setCurrentPage, mail, setMail }) => {
 				&gt;
 			</button>
 
+<<<<<<< Updated upstream
 			{/* Current Page */}
 			<input
 				className='w-16 text-center px-4 py-2 rounded-md border border-stroke dark:border-strokedark bg-white dark:bg-boxdark text-sm text-black dark:text-white shadow-default'
 				value={tmpMail}
 				defaultValue={'Nhập mail'}
+=======
+			{/* Text Inp */}
+			<input
+				className='w-500 text-center px-4 py-2 rounded-md border border-stroke dark:border-strokedark bg-white dark:bg-boxdark text-sm text-black dark:text-white shadow-default'
+				value={tmpMail}
+				placeholder={'Tìm kiếm bằng mail'}
+>>>>>>> Stashed changes
 				onChange={(e) => setTmpMail(e.target.value)}
 				onKeyDown={(e) => {
 					if (e.key === 'Enter') {

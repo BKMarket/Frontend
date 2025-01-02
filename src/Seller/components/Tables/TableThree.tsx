@@ -54,6 +54,13 @@ const TableThree = ({ stupidString }) => {
 		fetchData();
 	}, [location, currentPage]);
 
+<<<<<<< Updated upstream
+=======
+	useEffect(() => {
+		setCurrentPage(1);
+	}, [location]);
+
+>>>>>>> Stashed changes
 	return (
 		<div className='rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1'>
 			<Pagination currentPage={currentPage} setCurrentPage={setCurrentPage}></Pagination>
@@ -61,6 +68,7 @@ const TableThree = ({ stupidString }) => {
 				<table className='w-full table-auto'>
 					<thead>
 						<tr className='bg-gray-2 text-left dark:bg-meta-4'>
+<<<<<<< Updated upstream
 							<th className='min-w-[150px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11'></th>
 							<th className='min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11'>Mã đơn hàng</th>
 							<th className='min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11'>Tên sản phẩm</th>
@@ -68,11 +76,20 @@ const TableThree = ({ stupidString }) => {
 							<th className='min-w-[150px] py-4 px-4 font-medium text-black dark:text-white'>Ngày đặt hàng</th>
 							<th className='min-w-[120px] py-4 px-4 font-medium text-black dark:text-white'>Trạng thái</th>
 							<th className='py-4 px-4 font-medium text-black dark:text-white'>Hoạt động</th>
+=======
+							<th className='w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11'>Mã đơn hàng</th>
+							<th className='w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11'>Tên sản phẩm</th>
+							<th className='w-[200px] py-4 px-4 font-medium text-black dark:text-white'>Thông tin đơn hàng</th>
+							<th className='w-[150px] py-4 px-4 font-medium text-black dark:text-white'>Ngày đặt hàng</th>
+							<th className='w-[120px] py-4 px-4 font-medium text-black dark:text-white'>Trạng thái</th>
+							<th className='w-[150px] py-4 px-4 font-medium text-black dark:text-white'>Hoạt động</th>
+>>>>>>> Stashed changes
 						</tr>
 					</thead>
 					<tbody>
 						{orders.map((order, key) => (
 							<tr key={key}>
+<<<<<<< Updated upstream
 								<td className='border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11 relative group'>
 									<img src={order.product.thumbnail} className='h-15 w-15 object-contain' />
 									<h5>{order.product.title}</h5>
@@ -80,6 +97,11 @@ const TableThree = ({ stupidString }) => {
 								<td className='border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11'>
 									<h5 className='font-medium text-black dark:text-white'>{order._id}</h5>
 									<p className='text-sm'>
+=======
+								<td className='w-[220px] border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11'>
+									<h5 className='text-sm truncate'>{order._id}</h5>
+									<p className='text-sm truncate'>
+>>>>>>> Stashed changes
 										Thành tiền:{' '}
 										{(Number(order.product.price) * Number(order.product.quantity)).toLocaleString('vi-VN', {
 											style: 'currency',
@@ -87,6 +109,7 @@ const TableThree = ({ stupidString }) => {
 										})}
 									</p>
 								</td>
+<<<<<<< Updated upstream
 								<td className='border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11 relative group'>
 									<h5 className='font-medium text-black dark:text-white'>{order.product.title}</h5>
 								</td>
@@ -102,6 +125,28 @@ const TableThree = ({ stupidString }) => {
 											order.product.stage === 'received'
 												? 'bg-success text-success'
 												: order.product.stage === 'canceled'
+=======
+								<td className='w-[220px] border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11'>
+									<h5 className='font-medium text-black dark:text-white truncate'>{order.product.title}</h5>
+									<p className='text-sm truncate'>Số lượng: {order.product.quantity}</p>
+								</td>
+								<td className='w-[200px] border-b border-[#eee] py-5 px-4 dark:border-strokedark'>
+									<p className='text-sm truncate'>Tên: {order.account.firstName + ' ' + order.account.lastName}</p>
+									<p className='text-sm truncate'>Email: {order.account.email}</p>
+									<p className='text-sm truncate'>Số điện thoại: {order.account.phone}</p>
+								</td>
+								<td className='w-[150px] border-b border-[#eee] py-5 px-4 dark:border-strokedark'>
+									<p className='text-black dark:text-white truncate'>
+										{new Date(order.createdAt).toLocaleDateString('vi-en')}
+									</p>
+								</td>
+								<td className='w-[120px] border-b border-[#eee] py-5 px-4 dark:border-strokedark'>
+									<p
+										className={`inline-flex rounded-full bg-opacity-10 py-1 px-3 text-sm font-medium truncate ${
+											order.product.stage === 'received'
+												? 'bg-success text-success'
+												: order.product.stage === 'canceled' || order.product.stage === 'denied'
+>>>>>>> Stashed changes
 												? 'bg-danger text-danger'
 												: 'bg-warning text-warning'
 										}`}
@@ -113,9 +158,15 @@ const TableThree = ({ stupidString }) => {
 												case 'canceled':
 													return 'Đã hủy';
 												case 'accepted':
+<<<<<<< Updated upstream
 													return 'Đã chấp nhận';
 												case 'denied':
 													return 'Đã từ chối';
+=======
+													return 'Đồng ý';
+												case 'denied':
+													return 'Từ chối';
+>>>>>>> Stashed changes
 												case 'pending':
 													return 'Đang chờ';
 												default:
@@ -124,7 +175,11 @@ const TableThree = ({ stupidString }) => {
 										})(order.product.stage)}
 									</p>
 								</td>
+<<<<<<< Updated upstream
 								<td className='border-b border-[#eee] py-5 px-4 dark:border-strokedark'>
+=======
+								<td className='w-[150px] border-b border-[#eee] py-5 px-4 dark:border-strokedark'>
+>>>>>>> Stashed changes
 									<div className='flex items-center space-x-3.5'>
 										{order.product.stage === 'pending' && (
 											<div className='flex items-center space-x-3.5'>

@@ -60,7 +60,13 @@ const ECommerce: React.FC = () => {
 				</CardDataStats>
 			</div>
 
+<<<<<<< Updated upstream
 			<ChartOne />
+=======
+			<div className='my-6'>
+				<ChartOne />
+			</div>
+>>>>>>> Stashed changes
 		</>
 	);
 };
