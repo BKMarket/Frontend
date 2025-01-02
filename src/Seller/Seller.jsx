@@ -119,6 +119,16 @@ function App() {
 					}
 					key={location.pathname}
 				/>
+				<Route
+					path='/orders/received'
+					element={
+						<>
+							<PageTitle title='Đơn hàng đã giao' />
+							<TableThree stupidString='received' />
+						</>
+					}
+					key={location.pathname}
+				/>
 			</Routes>
 		</DefaultLayout>
 	);

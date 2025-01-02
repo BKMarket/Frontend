@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as Icons from '@fortawesome/free-solid-svg-icons';
 
-const Pagination = ({ currentPage, setCurrentPage }) => {
+const Pagination = ({ currentPage, setCurrentPage, setInp }) => {
+	const [tmpInp, setTmpInp] = useState('');
+
 	return (
 		<div className='flex items-center justify-center space-x-2 mt-4 mb-4'>
 			{/* Previous Button */}
@@ -33,6 +35,19 @@ const Pagination = ({ currentPage, setCurrentPage }) => {
 			>
 				&gt;
 			</button>
+
+			{/* Text Inp */}
+			<input
+				className='w-500 text-center px-4 py-2 rounded-md border border-stroke dark:border-strokedark bg-white dark:bg-boxdark text-sm text-black dark:text-white shadow-default'
+				value={tmpInp}
+				placeholder={'Tìm kiếm bằng tên'}
+				onChange={(e) => setTmpInp(e.target.value)}
+				onKeyDown={(e) => {
+					if (e.key === 'Enter') {
+						setInp(tmpInp);
+					}
+				}}
+			/>
 		</div>
 	);
 };
@@ -171,33 +186,37 @@ const Modal = ({ isOpen, setIsOpen, info }) => {
 	);
 };
 
-const TableTwo = () => {
+const TableTwo = ({ stupidString }) => {
 	const navigate = useNavigate();
 	const [productData, setProductData] = useState([]);
 	const [reload, setReload] = useState(false);
 	const [page, setPage] = useState(1);
 	const [openModal, setOpenModal] = useState(false);
+	const [name, setName] = useState('');
+
+	const location = useLocation();
 
 	useEffect(() => {
 		setPage(1);
+		setName('');
 	}, [location]);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await axios.get(import.meta.env.VITE_HOST + '/api/admin/products/waiting', {
-				params: { page },
+			const response = await axios.get(import.meta.env.VITE_HOST + '/api/admin/products/' + (stupidString || ''), {
+				params: { page, name },
 			});
 			setProductData(response.data.data);
 		};
 
 		fetchData();
-	}, [page, reload]);
+	}, [page, reload, location, name]);
 
 	useEffect;
 
 	return (
 		<div className='rounded-sm border border-stroke {bg-white} shadow-default dark:border-strokedark dark:bg-boxdark'>
-			<Pagination currentPage={page} setCurrentPage={setPage}></Pagination>
+			<Pagination currentPage={page} setCurrentPage={setPage} setInp={setName}></Pagination>
 			<div className='grid grid-cols-6 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5'>
 				<div className='col-span-1 flex items-center'>
 					<p className='font-medium'>Sản phẩm</p>
@@ -219,7 +238,7 @@ const TableTwo = () => {
 			{productData?.map((product, key) => (
 				<Product product={product} key={key} reload={reload} setReload={setReload}></Product>
 			))}
-			<Pagination currentPage={page} setCurrentPage={setPage}></Pagination>
+			<Pagination currentPage={page} setCurrentPage={setPage} setInp={setName}></Pagination>
 		</div>
 	);
 };

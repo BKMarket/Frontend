@@ -60,7 +60,9 @@ const ECommerce: React.FC = () => {
 				</CardDataStats>
 			</div>
 
-			<ChartOne />
+			<div className='my-6'>
+				<ChartOne />
+			</div>
 		</>
 	);
 };

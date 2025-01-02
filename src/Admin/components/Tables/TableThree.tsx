@@ -36,11 +36,11 @@ const Pagination = ({ currentPage, setCurrentPage, mail, setMail }) => {
 				&gt;
 			</button>
 
-			{/* Current Page */}
+			{/* Text Inp */}
 			<input
-				className='w-16 text-center px-4 py-2 rounded-md border border-stroke dark:border-strokedark bg-white dark:bg-boxdark text-sm text-black dark:text-white shadow-default'
+				className='w-500 text-center px-4 py-2 rounded-md border border-stroke dark:border-strokedark bg-white dark:bg-boxdark text-sm text-black dark:text-white shadow-default'
 				value={tmpMail}
-				defaultValue={'Nhập mail'}
+				placeholder={'Tìm kiếm bằng mail'}
 				onChange={(e) => setTmpMail(e.target.value)}
 				onKeyDown={(e) => {
 					if (e.key === 'Enter') {

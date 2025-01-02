@@ -43,11 +43,20 @@ function App() {
 					}
 				/>
 				<Route
-					path='products'
+					path='products/all'
 					element={
 						<>
 							<PageTitle title='Sản phẩm' />
 							<TableTwo />
+						</>
+					}
+				/>
+				<Route
+					path='products/pending'
+					element={
+						<>
+							<PageTitle title='Sản phẩm' />
+							<TableTwo stupidString={'waiting'} />
 						</>
 					}
 				/>
