@@ -8,7 +8,7 @@ import SignUp from '../Login&SignUp/SignUp';
 import Search from './Search/Search';
 import ShoppingCart from './Cart/Cart';
 import Listing from './Search/ListingSite';
-import Profile from './Profile/profile';
+import Profile from './Profile/Profile';
 import { LoggedinContext } from '../App';
 import { useContext, useEffect } from 'react';
 import NotFoundPage from '../Layout/NotFound';
