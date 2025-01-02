@@ -253,7 +253,7 @@ export default function Cart() {
 											className='btn btn-primary  bg-gray-600 hover:bg-gray-700 text-white rounded-md px-4 py-2'
 											onClick={async () => {
 												toast.success('Đang chuyển đến trang thanh toán...');
-												const response = await axios.get('http://localhost:3000/api/order/purchase', {
+												const response = await axios.get(import.meta.env.VITE_HOST + '/api/order/purchase', {
 													params: {
 														money: Number(
 															modalContent
