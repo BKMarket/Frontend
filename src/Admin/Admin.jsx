@@ -43,11 +43,7 @@ function App() {
 					}
 				/>
 				<Route
-<<<<<<< Updated upstream
-					path='products'
-=======
 					path='products/all'
->>>>>>> Stashed changes
 					element={
 						<>
 							<PageTitle title='Sản phẩm' />
@@ -56,8 +52,6 @@ function App() {
 					}
 				/>
 				<Route
-<<<<<<< Updated upstream
-=======
 					path='products/pending'
 					element={
 						<>
@@ -67,7 +61,6 @@ function App() {
 					}
 				/>
 				<Route
->>>>>>> Stashed changes
 					path='reports/all'
 					element={
 						<>

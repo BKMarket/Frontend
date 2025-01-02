@@ -164,7 +164,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 											{/* <!-- Dropdown Menu Start --> */}
 											<div className={`translate transform overflow-hidden ${!open && 'hidden'}`}>
 												<ul className='mt-4 mb-5.5 flex flex-col gap-2.5 pl-6'>
-<<<<<<< Updated upstream
 													<li>
 														<NavLink
 															to='orders/all'
@@ -209,39 +208,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 															Đơn hàng bị hủy
 														</NavLink>
 													</li>
-=======
-													{[
-														{ to: 'orders/all', name: 'Tất cả đơn hàng' },
-														{
-															to: 'orders/pending',
-															name: 'Đơn hàng chờ xác nhận',
-														},
-														{
-															to: 'orders/accepted',
-															name: 'Đơn hàng đang chuẩn bị',
-														},
-														{
-															to: 'orders/canceled',
-															name: 'Đơn hàng bị hủy',
-														},
-														{
-															to: 'orders/received',
-															name: 'Đơn hàng đã giao',
-														},
-													].map((section, key) => (
-														<li key={key}>
-															<NavLink
-																to={section.to}
-																className={({ isActive }) =>
-																	'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-																	(isActive && '!text-white')
-																}
-															>
-																{section.name}
-															</NavLink>
-														</li>
-													))}
->>>>>>> Stashed changes
 												</ul>
 											</div>
 											{/* <!-- Dropdown Menu End --> */}

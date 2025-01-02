@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 import './css/style.css';
 import './css/satoshi.css';
 import 'jsvectormap/dist/jsvectormap.css';
@@ -20,30 +19,6 @@ function App() {
 	const [loading, setLoading] = useState(true);
 	const { pathname } = useLocation();
 
-=======
-import { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Topbar from './scenes/global/Topbar';
-import Sidebar from './scenes/global/Sidebar';
-import Dashboard from './scenes/dashboard';
-import Manager_Product from './scenes/manager_product';
-import Order from './scenes/order';
-import New_product from './scenes/new_product';
-import Bar from './scenes/bar';
-import Form from './scenes/form';
-import Line from './scenes/line';
-import Pie from './scenes/pie';
-import FAQ from './scenes/faq';
-import Geography from './scenes/geography';
-import { CssBaseline, ThemeProvider } from '@mui/material';
-import { ColorModeContext, useMode } from './theme';
-import './seller.css';
-
-function App() {
-	const [loading, setLoading] = useState(true);
-	const { pathname } = useLocation();
-
->>>>>>> Stashed changes
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, [pathname]);
@@ -144,8 +119,6 @@ function App() {
 					}
 					key={location.pathname}
 				/>
-<<<<<<< Updated upstream
-=======
 				<Route
 					path='/orders/received'
 					element={
@@ -156,7 +129,6 @@ function App() {
 					}
 					key={location.pathname}
 				/>
->>>>>>> Stashed changes
 			</Routes>
 		</DefaultLayout>
 	);

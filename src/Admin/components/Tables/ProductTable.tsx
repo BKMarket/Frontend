@@ -1,20 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-<<<<<<< Updated upstream
 import { useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import * as Icons from '@fortawesome/free-solid-svg-icons';
-
-const Pagination = ({ currentPage, setCurrentPage }) => {
-=======
-import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as Icons from '@fortawesome/free-solid-svg-icons';
 
 const Pagination = ({ currentPage, setCurrentPage, setInp }) => {
 	const [tmpInp, setTmpInp] = useState('');
 
->>>>>>> Stashed changes
 	return (
 		<div className='flex items-center justify-center space-x-2 mt-4 mb-4'>
 			{/* Previous Button */}
@@ -43,8 +35,6 @@ const Pagination = ({ currentPage, setCurrentPage, setInp }) => {
 			>
 				&gt;
 			</button>
-<<<<<<< Updated upstream
-=======
 
 			{/* Text Inp */}
 			<input
@@ -58,7 +48,6 @@ const Pagination = ({ currentPage, setCurrentPage, setInp }) => {
 					}
 				}}
 			/>
->>>>>>> Stashed changes
 		</div>
 	);
 };
@@ -197,21 +186,12 @@ const Modal = ({ isOpen, setIsOpen, info }) => {
 	);
 };
 
-<<<<<<< Updated upstream
-const TableTwo = () => {
-=======
 const TableTwo = ({ stupidString }) => {
->>>>>>> Stashed changes
 	const navigate = useNavigate();
 	const [productData, setProductData] = useState([]);
 	const [reload, setReload] = useState(false);
 	const [page, setPage] = useState(1);
 	const [openModal, setOpenModal] = useState(false);
-<<<<<<< Updated upstream
-
-	useEffect(() => {
-		setPage(1);
-=======
 	const [name, setName] = useState('');
 
 	const location = useLocation();
@@ -219,38 +199,24 @@ const TableTwo = ({ stupidString }) => {
 	useEffect(() => {
 		setPage(1);
 		setName('');
->>>>>>> Stashed changes
 	}, [location]);
 
 	useEffect(() => {
 		const fetchData = async () => {
-<<<<<<< Updated upstream
-			const response = await axios.get(import.meta.env.VITE_HOST + '/api/admin/products/waiting', {
-				params: { page },
-=======
 			const response = await axios.get(import.meta.env.VITE_HOST + '/api/admin/products/' + (stupidString || ''), {
 				params: { page, name },
->>>>>>> Stashed changes
 			});
 			setProductData(response.data.data);
 		};
 
 		fetchData();
-<<<<<<< Updated upstream
-	}, [page, reload]);
-=======
 	}, [page, reload, location, name]);
->>>>>>> Stashed changes
 
 	useEffect;
 
 	return (
 		<div className='rounded-sm border border-stroke {bg-white} shadow-default dark:border-strokedark dark:bg-boxdark'>
-<<<<<<< Updated upstream
-			<Pagination currentPage={page} setCurrentPage={setPage}></Pagination>
-=======
 			<Pagination currentPage={page} setCurrentPage={setPage} setInp={setName}></Pagination>
->>>>>>> Stashed changes
 			<div className='grid grid-cols-6 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5'>
 				<div className='col-span-1 flex items-center'>
 					<p className='font-medium'>Sản phẩm</p>
@@ -272,11 +238,7 @@ const TableTwo = ({ stupidString }) => {
 			{productData?.map((product, key) => (
 				<Product product={product} key={key} reload={reload} setReload={setReload}></Product>
 			))}
-<<<<<<< Updated upstream
-			<Pagination currentPage={page} setCurrentPage={setPage}></Pagination>
-=======
 			<Pagination currentPage={page} setCurrentPage={setPage} setInp={setName}></Pagination>
->>>>>>> Stashed changes
 		</div>
 	);
 };
