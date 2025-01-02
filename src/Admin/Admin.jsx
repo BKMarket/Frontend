@@ -1,50 +1,113 @@
-import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
-import Topbar from "./scenes/global/Topbar";
-import Sidebar from "./scenes/global/Sidebar";
-import Dashboard from "./scenes/dashboard";
-import Manager_Product from "./scenes/manager_product";
-import Order from "./scenes/order";
-import New_product from "./scenes/new_product";
-import Bar from "./scenes/bar";
-import Form from "./scenes/form";
-import Line from "./scenes/line";
-import Pie from "./scenes/pie";
-import FAQ from "./scenes/faq";
-import Geography from "./scenes/geography";
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import { ColorModeContext, useMode } from "./theme";
-import "./seller.css";
+import './css/style.css';
+import './css/satoshi.css';
+import 'jsvectormap/dist/jsvectormap.css';
+import 'flatpickr/dist/flatpickr.min.css';
 
-function Admin() {
-  const [theme, colorMode] = useMode();
-  const [isSidebar, setIsSidebar] = useState(true);
+import { useEffect, useState } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
-  return (
-    <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <div className="app">
-          <Sidebar isSidebar={isSidebar} />
-          <main className="content">
-            <Topbar setIsSidebar={setIsSidebar} />
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/product" element={<Manager_Product />} />
-              <Route path="/new_product" element={<New_product />} />
-              <Route path="/order" element={<Order />} />
-              <Route path="/form" element={<Form />} />
-              <Route path="/bar" element={<Bar />} />
-              <Route path="/pie" element={<Pie />} />
-              <Route path="/line" element={<Line />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/geography" element={<Geography />} />
-            </Routes>
-          </main>
-        </div>
-      </ThemeProvider>
-    </ColorModeContext.Provider>
-  );
+import Loader from './common/Loader';
+import PageTitle from './components/PageTitle';
+import ECommerce from './pages/Dashboard/ECommerce';
+import CreateProduct from './pages/Form/CreateProduct';
+import UpdateProduct from './pages/Form/UpdateProduct';
+import TableThree from './components/Tables/TableThree';
+import TableOne from './components/Tables/TableOne';
+import TableTwo from './components/Tables/ProductTable';
+import DefaultLayout from './layout/DefaultLayout';
+
+function App() {
+	const [loading, setLoading] = useState(true);
+	const { pathname } = useLocation();
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [pathname]);
+
+	useEffect(() => {
+		setTimeout(() => setLoading(false), 1000);
+	}, []);
+
+	return loading ? (
+		<Loader />
+	) : (
+		<DefaultLayout>
+			<Routes>
+				<Route
+					index
+					element={
+						<>
+							<PageTitle title='Trang người bán' />
+							<ECommerce />
+						</>
+					}
+				/>
+				<Route
+					path='products'
+					element={
+						<>
+							<PageTitle title='Sản phẩm' />
+							<TableTwo />
+						</>
+					}
+				/>
+				<Route
+					path='reports/all'
+					element={
+						<>
+							<PageTitle title='Báo cáo' />
+							<TableOne />
+						</>
+					}
+				/>
+				<Route
+					path='reports/pending'
+					element={
+						<>
+							<PageTitle title='Báo cáo' />
+							<TableOne stupidString={'pending'} />
+						</>
+					}
+				/>
+				<Route
+					path='reports/innocent'
+					element={
+						<>
+							<PageTitle title='Báo cáo' />
+							<TableOne stupidString={'innocent'} />
+						</>
+					}
+				/>
+				<Route
+					path='reports/guilty'
+					element={
+						<>
+							<PageTitle title='Báo cáo' />
+							<TableOne stupidString={'guilty'} />
+						</>
+					}
+				/>
+				<Route
+					path='users/banned'
+					element={
+						<>
+							<PageTitle title='Người dùng' />
+							<TableThree stupidString={'banned'} />
+						</>
+					}
+				/>
+				<Route
+					path='users/all'
+					element={
+						<>
+							<PageTitle title='Người dùng' />
+							<TableThree />
+						</>
+					}
+				/>
+			</Routes>
+		</DefaultLayout>
+	);
 }
 
-export default Admin;
+export default App;
