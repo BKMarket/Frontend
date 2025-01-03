@@ -155,7 +155,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 														sidebarExpanded ? handleClick() : setSidebarExpanded(true);
 													}}
 												>
-													<FontAwesomeIcon icon={Icons.faBagShopping} />
+													<FontAwesomeIcon icon={Icons.faHand} />
 													Báo cáo
 													<FontAwesomeIcon
 														icon={open ? Icons.faMinus : Icons.faPlus}
@@ -211,7 +211,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 														sidebarExpanded ? handleClick() : setSidebarExpanded(true);
 													}}
 												>
-													<FontAwesomeIcon icon={Icons.faBagShopping} />
+													<FontAwesomeIcon icon={Icons.faBoxesPacking} />
 													Sản phẩm
 													<FontAwesomeIcon
 														icon={open ? Icons.faMinus : Icons.faPlus}
@@ -268,7 +268,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 														sidebarExpanded ? handleClick() : setSidebarExpanded(true);
 													}}
 												>
-													<FontAwesomeIcon icon={Icons.faBagShopping} />
+													<FontAwesomeIcon icon={Icons.faUserAlt} />
 													Người dùng
 													<FontAwesomeIcon
 														icon={open ? Icons.faMinus : Icons.faPlus}
