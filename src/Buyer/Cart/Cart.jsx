@@ -71,6 +71,7 @@ export default function Cart() {
 			const response = await axios.get(import.meta.env.VITE_HOST + '/api/carts');
 
 			setCart(response.data.data);
+			setSelected(response.data.data.map((product) => product.product));
 		};
 
 		fetchData();
@@ -100,6 +101,7 @@ export default function Cart() {
 				}),
 			})
 		);
+		window.dispatchEvent(new Event('storage'));
 	}, [cart]);
 
 	return (

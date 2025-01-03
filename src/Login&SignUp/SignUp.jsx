@@ -34,6 +34,7 @@ export default function SignUp() {
 			const { token, account } = response.data;
 			localStorage.setItem('token', token);
 			localStorage.setItem('account', JSON.stringify(account));
+			window.dispatchEvent(new Event('storage'));
 			setLoggedin(true);
 			setLoading(false);
 			navigate('/');

@@ -5,6 +5,40 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as Icons from '@fortawesome/free-solid-svg-icons';
 import toast from 'react-hot-toast';
+import NotFoundPage from '../../Layout/NotFound';
+
+const Pagination = ({ currentPage, setCurrentPage }) => {
+	return (
+		<div className='flex items-center justify-center space-x-2 mt-4 mb-4'>
+			{/* Previous Button */}
+			<button
+				className={`px-4 py-2 rounded-md border border-stroke dark:border-strokedark bg-white dark:bg-boxdark text-sm text-black dark:text-white shadow-default hover:brightness-125 ${
+					currentPage <= 1 ? 'opacity-50 cursor-not-allowed' : ''
+				}`}
+				onClick={() => setCurrentPage(currentPage - 1)}
+				disabled={currentPage === 1}
+			>
+				&lt;
+			</button>
+
+			{/* Current Page */}
+			<input
+				className='w-16 text-center px-4 py-2 rounded-md border border-stroke dark:border-strokedark bg-white dark:bg-boxdark text-sm text-black dark:text-white shadow-default'
+				value={currentPage}
+				onChange={(e) => e.target.value && setCurrentPage(Number(e.target.value))}
+				min='1'
+			/>
+
+			{/* Next Button */}
+			<button
+				className={`px-4 py-2 rounded-md border border-stroke dark:border-strokedark bg-white dark:bg-boxdark text-sm text-black dark:text-white shadow-default hover:brightness-125`}
+				onClick={() => setCurrentPage(currentPage + 1)}
+			>
+				&gt;
+			</button>
+		</div>
+	);
+};
 
 const Button = ({ children, variant = 'default', onClick }) => {
 	const baseClasses = 'px-4 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2';
@@ -163,6 +197,7 @@ const OrderItem = ({ item, order }) => {
 
 const Order = ({ order }) => {
 	const [modalAppear, setModalAppear] = useState(false);
+
 	const stageToStep = (stage) => {
 		console.log(stage);
 		switch (stage) {
@@ -365,24 +400,29 @@ const Order = ({ order }) => {
 
 const OrderHistoryPage = () => {
 	const [orders, setOrders] = React.useState([]);
+	const [currentPage, setCurrentPage] = useState(1);
 
 	React.useEffect(() => {
 		const fetchData = async () => {
-			const response = await axios.get(import.meta.env.VITE_HOST + '/api/order');
+			const response = await axios.get(import.meta.env.VITE_HOST + '/api/order', {
+				params: { page: currentPage },
+			});
 
 			setOrders(response.data.data);
 		};
 
 		fetchData();
-	}, []);
+	}, [currentPage]);
 
 	return (
 		<div className='container mx-auto px-4 py-8 bg-base-200 min-h-screen'>
 			<h1 className='text-2xl font-bold mb-6'>Theo dõi đơn hàng</h1>
 			<div className='space-y-4'>
-				{orders.map((order) => (
-					<Order key={order.id} order={order} />
-				))}
+				<Pagination currentPage={currentPage} setCurrentPage={setCurrentPage}></Pagination>
+
+				{orders?.length ? orders.map((order) => <Order key={order.id} order={order} />) : <NotFoundPage></NotFoundPage>}
+
+				<Pagination currentPage={currentPage} setCurrentPage={setCurrentPage}></Pagination>
 			</div>
 		</div>
 	);

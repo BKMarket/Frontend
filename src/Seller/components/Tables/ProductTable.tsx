@@ -5,22 +5,80 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as Icons from '@fortawesome/free-solid-svg-icons';
 
+const Pagination = ({ currentPage, setCurrentPage, setInp }) => {
+	const [tmpInp, setTmpInp] = useState('');
+
+	return (
+		<div className='flex items-center justify-center space-x-2 mt-4 mb-4'>
+			{/* Previous Button */}
+			<button
+				className={`px-4 py-2 rounded-md border border-stroke dark:border-strokedark bg-white dark:bg-boxdark text-sm text-black dark:text-white shadow-default hover:brightness-125 ${
+					currentPage <= 1 ? 'opacity-50 cursor-not-allowed' : ''
+				}`}
+				onClick={() => setCurrentPage(currentPage - 1)}
+				disabled={currentPage === 1}
+			>
+				&lt;
+			</button>
+
+			{/* Current Page */}
+			<input
+				className='w-16 text-center px-4 py-2 rounded-md border border-stroke dark:border-strokedark bg-white dark:bg-boxdark text-sm text-black dark:text-white shadow-default'
+				value={currentPage}
+				onChange={(e) => e.target.value && setCurrentPage(Number(e.target.value))}
+				min='1'
+			/>
+
+			{/* Next Button */}
+			<button
+				className={`px-4 py-2 rounded-md border border-stroke dark:border-strokedark bg-white dark:bg-boxdark text-sm text-black dark:text-white shadow-default hover:brightness-125`}
+				onClick={() => setCurrentPage(currentPage + 1)}
+			>
+				&gt;
+			</button>
+
+			{/* Text Inp */}
+			<input
+				className='w-500 text-center px-4 py-2 rounded-md border border-stroke dark:border-strokedark bg-white dark:bg-boxdark text-sm text-black dark:text-white shadow-default'
+				value={tmpInp}
+				placeholder={'Tìm kiếm bằng tên'}
+				onChange={(e) => setTmpInp(e.target.value)}
+				onKeyDown={(e) => {
+					if (e.key === 'Enter') {
+						setInp(tmpInp);
+					}
+				}}
+			/>
+		</div>
+	);
+};
+
 const TableTwo = ({ stupidString }) => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const [productData, setProductData] = useState([]);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [name, setName] = useState('');
+
+	useEffect(() => {
+		setCurrentPage(1);
+		setName('');
+	}, [location]);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await axios.get(import.meta.env.VITE_HOST + '/api/seller/products/' + stupidString, {});
+			const response = await axios.get(import.meta.env.VITE_HOST + '/api/seller/products/' + stupidString, {
+				params: { page: currentPage, name },
+			});
 			setProductData(response.data.data);
 		};
 
 		fetchData();
-	}, [location]);
+	}, [location, name, currentPage]);
 
 	return (
 		<div className='rounded-sm border border-stroke {bg-white} shadow-default dark:border-strokedark dark:bg-boxdark'>
+			<Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} setInp={setName}></Pagination>
 			<div className='grid grid-cols-6 border-t border-stroke py-4.5 px-4 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5'>
 				<div className='col-span-1 flex items-center'>
 					<p className='font-medium'>Sản phẩm</p>
@@ -120,6 +178,7 @@ const TableTwo = ({ stupidString }) => {
 					</div>
 				</div>
 			))}
+			<Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} setInp={setName}></Pagination>
 		</div>
 	);
 };

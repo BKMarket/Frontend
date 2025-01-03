@@ -123,6 +123,8 @@ const Profile = () => {
 										const response = await axios.put(import.meta.env.VITE_HOST + '/api/profile/update', tmpUser);
 										setUser(tmpUser);
 										localStorage.setItem('account', JSON.stringify(response.data.account));
+
+										window.dispatchEvent(new Event('storage'));
 										toast.success('Cập nhật thông tin thành công');
 									} catch (err) {
 										console.log(err);

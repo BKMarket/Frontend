@@ -9,6 +9,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as Icons from '@fortawesome/free-solid-svg-icons';
+import NotFoundPage from '../../Layout/NotFound';
 
 export default function Listing() {
 	SwiperCore.use([Navigation]);
@@ -35,7 +36,9 @@ export default function Listing() {
 		fetchListing();
 	}, [params.slug]);
 
-	return (
+	return !loading && !listings ? (
+		<NotFoundPage />
+	) : (
 		<main>
 			{loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
 			{error && <p className='text-center my-7 text-2xl'>Something went wrong!</p>}
@@ -136,6 +139,7 @@ export default function Listing() {
 										});
 										account.cart = response.data.data;
 										localStorage.setItem('account', JSON.stringify(account));
+										window.dispatchEvent(new Event('storage'));
 										toast.success('Đã thêm vào giỏ hàng');
 									} catch (err) {
 										console.log(err);
@@ -152,7 +156,7 @@ export default function Listing() {
 									type='button'
 									className='px-4 py-2 bg-gray-200 text-gray-600 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300'
 									id='decrement'
-									onClick={() => setQuantity(String(Number(quantity) - 1))}
+									onClick={() => setQuantity(String(Math.max(Number(quantity) - 1, 1)))}
 								>
 									-
 								</button>
@@ -168,7 +172,7 @@ export default function Listing() {
 									type='button'
 									className='px-4 py-2 bg-gray-200 text-gray-600 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300'
 									id='increment'
-									onClick={() => setQuantity(String(Number(quantity) + 1))}
+									onClick={() => setQuantity(String(Math.max(Number(quantity) + 1, 1)))}
 								>
 									+
 								</button>

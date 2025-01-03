@@ -4,7 +4,7 @@ import logo from '../assets/logo.png';
 import { headerLinksLeft, headerLinksRight } from './constant';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as Icons from '@fortawesome/free-solid-svg-icons';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { LoggedinContext } from '../App';
 
 export default function Header() {
@@ -12,6 +12,28 @@ export default function Header() {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [searchInp, setSearchInp] = useState(new URLSearchParams(location.search).get('searchTerm'));
+	const [numCartItems, setNumCartItems] = useState(0);
+
+	useEffect(() => {
+		const storedCartCount = JSON.parse(localStorage.getItem('account') || '{}').cart?.length;
+		if (storedCartCount) {
+			setNumCartItems(Number(storedCartCount));
+		}
+
+		// Listen for changes in localStorage (across tabs or windows)
+		const handleStorageChange = (event) => {
+			// Listen for changes to the 'account' key in localStorage
+			const updatedCartCount = JSON.parse(localStorage.getItem('account') || '{}').cart?.length;
+			setNumCartItems(updatedCartCount || 0); // Update state with the new cart count
+		};
+
+		window.addEventListener('storage', handleStorageChange);
+
+		// Cleanup the event listener when the component unmounts
+		return () => {
+			window.removeEventListener('storage', handleStorageChange);
+		};
+	}, []);
 
 	return (
 		<header className='bg-slate-300 shadow-md flex-col justify-around px-3 py-5 sticky top-0 z-50'>
@@ -92,7 +114,14 @@ export default function Header() {
 				</form>
 
 				<Link to='/cart' className='p-3 rounded-md flex items-center w-auto' onClick={() => window.scrollTo(0, 0)}>
-					<FontAwesomeIcon icon={Icons.faShoppingCart} className='text-2xl text-slate-700 cursor-pointer' />
+					<div className='relative'>
+						<FontAwesomeIcon icon={Icons.faShoppingCart} className='text-2xl text-slate-700 cursor-pointer' />
+						{numCartItems > 0 && (
+							<span className='absolute top-[-10px] right-[-10px] bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center'>
+								{numCartItems}
+							</span>
+						)}
+					</div>
 				</Link>
 
 				<Link to='/order' className='p-3 rounded-md flex items-center w-auto' onClick={() => window.scrollTo(0, 0)}>

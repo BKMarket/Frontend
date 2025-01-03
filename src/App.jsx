@@ -18,6 +18,7 @@ function App() {
 				const { account } = response.data;
 				setLoggedin(true);
 				localStorage.setItem('account', JSON.stringify(account));
+				window.dispatchEvent(new Event('storage'));
 			} catch (error) {
 				console.log(error);
 				setLoggedin(false);
@@ -31,8 +32,10 @@ function App() {
 	useEffect(() => {
 		if (loggedin && localStorage.getItem('token')) {
 			localStorage.setItem('login', 'true');
+			window.dispatchEvent(new Event('storage'));
 		} else {
 			localStorage.removeItem('login');
+			window.dispatchEvent(new Event('storage'));
 		}
 	}, [loggedin]);
 
