@@ -253,6 +253,7 @@ export default function Cart() {
 											className='btn btn-primary  bg-gray-600 hover:bg-gray-700 text-white rounded-md px-4 py-2'
 											onClick={async () => {
 												toast.success('Đang chuyển đến trang thanh toán...');
+												const { protocol, hostname, port } = window.location;
 												const response = await axios.get(import.meta.env.VITE_HOST + '/api/order/purchase', {
 													params: {
 														money: Number(
@@ -261,7 +262,7 @@ export default function Cart() {
 																.replace('.', '')
 																.replace(',', '.')
 														),
-														returnUrl: 'http://localhost:5173/order',
+														returnUrl: `${protocol}//${hostname}${port ? `:${port}` : ''}/order`,
 														products: selected.map((product) => ({
 															product: product._id,
 															quantity: cart.find((x) => x.product._id === product._id).quantity,
